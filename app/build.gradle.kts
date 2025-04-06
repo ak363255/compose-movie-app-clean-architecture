@@ -2,8 +2,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
-    alias(libs.plugins.dagger.hilt.android)
-    alias(libs.plugins.google.devtools.ksp)
+    alias(libs.plugins.kotlin.serialization)
 }
 
 android {
@@ -43,6 +42,8 @@ android {
 
 dependencies {
 
+    implementation(project(":domain"))
+    implementation(project(":data"))
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
@@ -51,13 +52,45 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
+    implementation(libs.androidx.material3.extended)
 
-    //Dagger hilt
-    implementation(libs.hilt.android)
-    ksp(libs.hilt.android.compiler)
 
     //Compose navigation
     implementation(libs.androidx.navigation.compose)
+    //compose constraint layout
+    implementation (libs.androidx.constraintlayout.compose)
+
+    //compose viewmodel
+    implementation(libs.androidx.lifecycle.viewmodel.compose)
+
+
+    //Koin Di
+    implementation(libs.koin.android)
+    implementation(libs.koin.androidx.compose)
+    implementation(libs.koin.androidx.compose.navigation)
+
+
+    //retrofit
+    implementation(libs.retrofit)
+    implementation(libs.converter.gson)
+    //okhttp3
+    implementation(platform(libs.okhttp.bom))
+    // define any required OkHttp artifacts without version
+    implementation(libs.okhttp)
+    implementation(libs.logging.interceptor)
+    //kotlin seriallization
+    implementation(libs.kotlinx.serialization.json)
+
+    //coil image loading lib
+    implementation(libs.coil.compose)
+    implementation(libs.coil.network.okhttp)
+
+    //paging 3 dep
+    implementation(libs.androidx.paging.runtime)
+    implementation(libs.androidx.paging.compose)
+
+
+
 
 
     testImplementation(libs.junit)
