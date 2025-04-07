@@ -28,8 +28,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.currentBackStackEntryAsState
-import com.example.movieapp.ui.composables.moviehomepageui.MovieRoutes
-import com.example.movieapp.ui.composables.moviehomepageui.route
+import com.example.movieapp.route.MovieRoutes
+import com.example.movieapp.route.route
 import com.example.movieapp.ui.theme.MovieAppColor
 
 object BottomNavigations {

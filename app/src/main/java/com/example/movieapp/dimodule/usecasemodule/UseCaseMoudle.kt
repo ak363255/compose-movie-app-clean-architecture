@@ -7,24 +7,15 @@ import com.example.data.repository.MovieRepositoryImpl
 import com.example.data.repository.MovieSearchRepositoryImpl
 import com.example.domain.repository.MovieRepository
 import com.example.domain.repository.MovieSearchRepository
+import com.example.domain.usecase.GetFavMovieFromIdUseCase
 import com.example.domain.usecase.GetMoviePageUseCase
 import com.example.domain.usecase.GetMoviesUseCase
+import com.example.domain.usecase.InsertMovieUseCase
+import com.example.domain.usecase.MovieDetailUseCase
 import com.example.domain.usecase.MovieSearchUseCase
 import org.koin.dsl.module
 
 val useCaseModule = module {
-    single<MovieDataSource.LocalDataSource> {
-        MovieLoacalDataSourceImpl()
-    }
-    single<MovieDataSource.RemoteDataSource> {
-        MovieRemoteDataSourceImpl(get())
-    }
-    single<MovieRepository> {
-        MovieRepositoryImpl(
-            localDataSource = get(),
-            remoteDataSource = get()
-        )
-    }
     single {
         GetMoviesUseCase(
             movieRepository = get()
@@ -36,10 +27,19 @@ val useCaseModule = module {
             movieRepository = get()
         )
     }
-    single<MovieSearchRepository> {
-        MovieSearchRepositoryImpl(get())
-    }
     single {
         MovieSearchUseCase(get())
     }
+    single {
+        MovieDetailUseCase(get())
+    }
+    single {
+        InsertMovieUseCase(get())
+    }
+
+    single {
+        GetFavMovieFromIdUseCase(get())
+    }
+
+
 }

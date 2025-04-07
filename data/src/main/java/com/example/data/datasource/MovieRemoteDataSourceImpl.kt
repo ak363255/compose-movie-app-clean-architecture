@@ -3,15 +3,11 @@ package com.example.data.datasource
 import com.example.data.datamodels.MovieDetailData
 import com.example.data.datamodels.MovieResults
 import com.example.data.datamodels.NetworkResponse
-import com.example.data.datamodels.toDoman
 import com.example.data.netowrk.NetworkService
 import com.example.data.urls.UrlConstants
 import com.example.data.urls.UrlConstants.MOVIE_URL
-import com.example.domain.models.Movies
-import com.example.domain.models.Result
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.mapLatest
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import java.net.URLEncoder
 
 class MovieRemoteDataSourceImpl(
@@ -28,7 +24,11 @@ class MovieRemoteDataSourceImpl(
         page: Int
     ): NetworkResponse<MovieResults> = networkService.makeGetRequest<MovieResults>(
         UrlConstants.MOVIE_QUERY_URL +
-                "&s=${URLEncoder.encode(query, "UTF-8")}" +
+                "&s=${
+                    withContext(Dispatchers.IO) {
+                        URLEncoder.encode(query.trim(), "UTF-8")
+                    }
+                }" +
                 "&page=${page}"
     )
 }
