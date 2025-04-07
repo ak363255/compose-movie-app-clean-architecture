@@ -1,6 +1,7 @@
 package com.example.data.roomdb.moviedao
 
 import androidx.room.Dao
+import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
@@ -27,4 +28,13 @@ interface MovieDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAllRatingEntity(entity: List<RatingEntity>)
+
+    @Query("DELETE FROM movies WHERE imdbID = :movieId")
+    suspend fun deleteMovieById(movieId: String)
+
+    @Transaction
+    suspend fun insertMovieWithRating(movieEntity: MovieEntity,ratingEntity: List<RatingEntity>){
+        insertMovieEntity(movieEntity)
+        insertAllRatingEntity(ratingEntity)
+    }
 }

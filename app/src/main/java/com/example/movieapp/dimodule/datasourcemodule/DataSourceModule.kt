@@ -7,7 +7,7 @@ import org.koin.dsl.module
 
 val datasourcemodule = module {
     single<MovieDataSource.LocalDataSource> {
-        MovieLoacalDataSourceImpl()
+        MovieLoacalDataSourceImpl(get())
     }
     single<MovieDataSource.RemoteDataSource> {
         MovieRemoteDataSourceImpl(get())

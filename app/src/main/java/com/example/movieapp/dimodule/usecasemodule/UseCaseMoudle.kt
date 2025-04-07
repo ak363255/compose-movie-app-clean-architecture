@@ -7,7 +7,9 @@ import com.example.data.repository.MovieRepositoryImpl
 import com.example.data.repository.MovieSearchRepositoryImpl
 import com.example.domain.repository.MovieRepository
 import com.example.domain.repository.MovieSearchRepository
+import com.example.domain.usecase.DeleteFavMovieUseCase
 import com.example.domain.usecase.GetFavMovieFromIdUseCase
+import com.example.domain.usecase.GetFavMovieUseCase
 import com.example.domain.usecase.GetMoviePageUseCase
 import com.example.domain.usecase.GetMoviesUseCase
 import com.example.domain.usecase.InsertMovieUseCase
@@ -16,30 +18,12 @@ import com.example.domain.usecase.MovieSearchUseCase
 import org.koin.dsl.module
 
 val useCaseModule = module {
-    single {
-        GetMoviesUseCase(
-            movieRepository = get()
-        )
-    }
-
-    single {
-        GetMoviePageUseCase(
-            movieRepository = get()
-        )
-    }
-    single {
-        MovieSearchUseCase(get())
-    }
-    single {
-        MovieDetailUseCase(get())
-    }
-    single {
-        InsertMovieUseCase(get())
-    }
-
-    single {
-        GetFavMovieFromIdUseCase(get())
-    }
-
-
+    single { GetMoviesUseCase( get())}
+    single { GetMoviePageUseCase(movieRepository = get()) }
+    single { MovieSearchUseCase(get()) }
+    single { MovieDetailUseCase(get()) }
+    single { InsertMovieUseCase(get()) }
+    single { GetFavMovieFromIdUseCase(get()) }
+    single { DeleteFavMovieUseCase(get()) }
+    single { GetFavMovieUseCase(get()) }
 }

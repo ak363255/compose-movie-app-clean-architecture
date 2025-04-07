@@ -45,10 +45,10 @@ fun MovieDetailScreen(
 ) {
     LaunchedEffect(Unit) {
         movieDetailViewModel.getMovieDetail()
-        movieDetailViewModel.getShortListedMovie()
+        movieDetailViewModel.initMovieDetailState()
     }
     val movieDetail = movieDetailViewModel.movieDetail.collectAsState()
-    val shortListState = movieDetailViewModel.shortListState.collectAsState()
+    val movieDetailUiState = movieDetailViewModel.movieDetailUiState.collectAsState()
     when (val state = movieDetail.value) {
         is Result.Error -> {
             MovieNotFoundPage()
@@ -61,11 +61,11 @@ fun MovieDetailScreen(
         is Result.Success<MovieDetail> -> {
             MovieDetailUi(
                 movieDetail = state.data, modifier = modifier, onBackArrowClicked = {
-                mainRouter.navigateUp()
-            }, onShortListIconClicked = { shortListedMovie ->
-                movieDetailViewModel.insertFavMovie(shortListedMovie)
-            },
-                isFav = shortListState.value is Result.Success
+                    mainRouter.navigateUp()
+                }, onShortListIconClicked = { shortListedMovie ->
+                    movieDetailViewModel.toggleShortlistMovie(shortListedMovie)
+                },
+                isFav = movieDetailUiState.value.isFavMovie
             )
         }
     }

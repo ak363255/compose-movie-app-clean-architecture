@@ -1,5 +1,6 @@
 package com.example.movieapp.dimodule.viewmodelmodule
 
+import com.example.movieapp.ui.composables.favMovie.viewmodel.FavMovieScreenViewModel
 import com.example.movieapp.ui.composables.movieSearchScreen.viewmodel.MovieSearchViewModel
 import com.example.movieapp.ui.composables.movielistscreen.viemodel.MovieListViewModel
 import com.example.movieapp.ui.composables.movieDetail.viewmodel.MovieDetailViewModel
@@ -12,5 +13,6 @@ val viewmodelModule = module {
        viewModelOf(::MovieListViewModel)
        viewModelOf(::MovieSearchViewModel)
        viewModelOf(::MovieDetailViewModel)
+       viewModelOf(::FavMovieScreenViewModel)
    //  factory<MovieListViewModel> { MovieListViewModel(get()) }
 }
