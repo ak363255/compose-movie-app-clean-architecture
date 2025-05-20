@@ -19,7 +19,7 @@ class MovieSearchPagingSource(
         val response = remoteDataSource.searchMovie(page = page, query = query)
         return when(response){
             is NetworkResponse.Error -> {
-                LoadResult.Error(throw Exception(response.error))
+                LoadResult.Error(Exception(response.error))
             }
             is NetworkResponse.Success<MovieResults> -> {
                 val domainData = response.data.toDoman()
