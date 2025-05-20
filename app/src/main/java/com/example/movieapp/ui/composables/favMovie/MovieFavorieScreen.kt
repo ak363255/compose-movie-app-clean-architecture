@@ -25,32 +25,38 @@ import com.example.movieapp.ui.composables.moviehomepageui.MovieMainRouter
 import com.example.movieapp.ui.theme.MovieAppColor
 
 @Composable
-fun FavoriteMovieScreen(mainRouter: MovieMainRouter,favMovieScreenViewModel: FavMovieScreenViewModel){
+fun FavoriteMovieScreen(
+    mainRouter: MovieMainRouter,
+    favMovieScreenViewModel: FavMovieScreenViewModel
+) {
 
     LaunchedEffect(Unit) {
         favMovieScreenViewModel.getFavMovies()
     }
     val favMoviesState = favMovieScreenViewModel.movies.collectAsState()
-        when(val data = favMoviesState.value){
-            is Result.Error -> {
+    when (val data = favMoviesState.value) {
+        is Result.Error -> {
+            NoFavMovieFound()
+        }
+
+        Result.Loading -> {
+            FullPageLoader(loaderSize = 32.dp)
+        }
+
+        is Result.Success<List<MovieDetail>> -> {
+            val movies = data.data
+            if (movies.isNotEmpty()) {
+                Screen(movies)
+                //FavMovieListUi(mainRouter = mainRouter, movies = movies)
+            } else {
                 NoFavMovieFound()
             }
-            Result.Loading -> {
-                FullPageLoader(loaderSize = 32.dp)
-            }
-            is Result.Success<List<MovieDetail>> -> {
-                val movies = data.data
-                if(movies.isNotEmpty()){
-                    FavMovieListUi(mainRouter = mainRouter, movies = movies)
-                }else{
-                    NoFavMovieFound()
-                }
-            }
         }
+    }
 }
 
 @Composable
-fun NoFavMovieFound(modifier :Modifier = Modifier){
+fun NoFavMovieFound(modifier: Modifier = Modifier) {
     ConstraintLayout(
         modifier = modifier
             .fillMaxSize()

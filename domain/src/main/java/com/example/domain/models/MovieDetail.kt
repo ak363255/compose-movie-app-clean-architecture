@@ -1,5 +1,9 @@
 package com.example.domain.models
 
+data class MovieActor(
+    val name: String,
+    val image: String
+)
 data class MovieDetail(
     val title: String,
     val year: String,
@@ -25,5 +29,32 @@ data class MovieDetail(
     val boxOffice: String,
     val production: String,
     val website: String,
-    val response: String
+    val response: String,
+    val chips : List<String> = mutableListOf("Action","Drama","History"),
+    val fakeActors : List<MovieActor> = listOf(
+        MovieActor(
+            "Jaoquin Phoenix",
+            "https://image.tmdb.org/t/p/w138_and_h175_face/nXMzvVF6xR3OXOedozfOcoA20xh.jpg"
+        ),
+        MovieActor(
+            "Robert De Niro",
+            "https://image.tmdb.org/t/p/w138_and_h175_face/cT8htcckIuyI1Lqwt1CvD02ynTh.jpg"
+        ),
+        MovieActor(
+            "Zazie Beetz",
+            "https://image.tmdb.org/t/p/w138_and_h175_face/sgxzT54GnvgeMnOZgpQQx9csAdd.jpg"
+        ),
+        MovieActor(
+            "Jaoquin Phoenix",
+            "https://image.tmdb.org/t/p/w138_and_h175_face/nXMzvVF6xR3OXOedozfOcoA20xh.jpg"
+        ),
+        MovieActor(
+            "Robert De Niro",
+            "https://image.tmdb.org/t/p/w138_and_h175_face/cT8htcckIuyI1Lqwt1CvD02ynTh.jpg"
+        ),
+        MovieActor(
+            "Zazie Beetz",
+            "https://image.tmdb.org/t/p/w138_and_h175_face/sgxzT54GnvgeMnOZgpQQx9csAdd.jpg"
+        )
+    ),
 )
